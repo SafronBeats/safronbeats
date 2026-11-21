@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your order — SAFRON BEATS</title>
+<meta name="theme-color" content="#0b0a09">
+<link rel="stylesheet" href="/css/app.css">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a href="/" class="brand" aria-label="SAFRON BEATS"><img src="/assets/safron-logo.png" alt="SAFRON BEATS"></a>
+    <nav class="nav"><a href="/">Beats</a><a href="/licensing">Licensing</a></nav>
+    <div class="topbar-right"><span class="mono" id="orderRef">—</span></div>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+  <div class="page-head">
+    <div class="eyebrow" id="statusEyebrow">Order</div>
+    <h1 id="statusTitle">Loading your order…</h1>
+    <p id="statusCopy"></p>
+  </div>
+
+  <div class="order-grid" id="orderGrid" hidden>
+    <div>
+      <h2 class="eyebrow" style="margin-bottom:14px">Your files</h2>
+      <div id="items"></div>
+      <div class="notice" style="margin-top:18px">
+        Bookmark this page — your download links live here. Every purchase also generates a license you can print or save as PDF.
+      </div>
+    </div>
+    <aside>
+      <div class="panel">
+        <h2>Receipt</h2>
+        <div id="receipt"></div>
+      </div>
+      <div class="panel" style="margin-top:16px">
+        <div class="eyebrow" style="margin-bottom:8px">Need a hand?</div>
+        <p class="hint" style="margin:0 0 12px">Wrong email, missing file, need an upgrade? Send the order number and it gets sorted.</p>
+        <a class="btn small block" id="supportLink" href="#">Contact the producer</a>
+      </div>
+    </aside>
+  </div>
+
+  <div id="notFound" hidden style="padding:60px 0">
+    <h2 class="display" style="font-size:36px">Order not found</h2>
+    <p style="color:var(--muted)">That link may be mistyped. Head back to the store and try again.</p>
+    <a class="btn" href="/">Back to the store</a>
+  </div>
+</main>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<script src="/js/order.js"></script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Licensing &amp; terms — SAFRON BEATS</title>
+<meta name="theme-color" content="#0b0a09">
+<link rel="stylesheet" href="/css/app.css">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a href="/" class="brand" aria-label="SAFRON BEATS"><img src="/assets/safron-logo.png" alt="SAFRON BEATS"></a>
+    <nav class="nav"><a href="/">Beats</a><a href="/licensing">Licensing</a><a href="/#about">About</a><a href="/#contact">Contact</a></nav>
+    <div class="topbar-right"><a class="btn small" href="/#catalog">Browse beats</a></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="page-head">
+    <div class="eyebrow">Terms of use</div>
+    <h1>Licensing, in plain language.</h1>
+    <p>Every beat is leased, not sold. Pick the tier that fits the size of the release — the caps are real, so read them before you drop. Standard rates are listed here; each beat shows its exact price before you pay.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:minmax(0,1fr);padding:30px 0 0">
+    <div class="notice">
+      <strong style="color:var(--ink)">The short version.</strong> You get a non-exclusive, perpetual, worldwide license to record and release a song over the beat. The producer keeps ownership of the instrumental. Higher tiers unlock WAV files, stems and bigger distribution caps. Exclusive rights remove the beat from sale permanently.
+    </div>
+  </div>
+
+  <section style="padding:34px 0 10px">
+    <div class="eyebrow">Comparison</div>
+    <h2 class="display" style="font-size:clamp(26px,3.4vw,40px);margin:10px 0 6px">What each tier allows</h2>
+    <div style="overflow-x:auto">
+      <table class="license-table" id="capsTable">
+        <thead><tr><th>Tier</th><th>Files</th><th>Distribution</th><th>Streams</th><th>Videos</th><th>Live shows</th><th>Radio</th><th>Price</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section style="padding:20px 0 10px" id="tiers">
+    <div class="eyebrow">Full terms</div>
+    <div id="tierBlocks"></div>
+  </section>
+
+  <section style="padding:20px 0 60px" class="faq" id="faq">
+    <div class="eyebrow">FAQ</div>
+    <h2 class="display" style="font-size:clamp(26px,3.4vw,40px);margin:10px 0 20px">Questions that come up</h2>
+
+    <details>
+      <summary>Can I release my song on Spotify, Apple Music and YouTube?</summary>
+      <p>Yes. Every tier includes monetised streaming and video rights inside its caps. Blow past them and you upgrade — what you already paid gets credited. No renegotiation, no phone call.</p>
+    </details>
+    <details>
+      <summary>What is the difference between a lease and an exclusive?</summary>
+      <p>A lease is non-exclusive: the beat stays available, and other artists may license it too. An exclusive purchase removes the beat from sale permanently and gives you sole right to the instrumental. Licenses already granted before the exclusive remain valid.</p>
+    </details>
+    <details>
+      <summary>Do I have to credit the producer?</summary>
+      <p>Yes — credit “Prod. SAFRON BEATS” wherever the song is released: streaming metadata, video descriptions and artwork notes. It is a condition of every tier.</p>
+    </details>
+    <details>
+      <summary>What files do I get?</summary>
+      <p>Basic: untagged MP3 320 kbps. Premium: WAV 24-bit plus MP3. Trackout: both plus a ZIP or RAR of the individual stems. Unlimited and Exclusive: everything, with no usage caps.</p>
+    </details>
+    <details>
+      <summary>How fast is delivery?</summary>
+      <p>Immediately. The order page unlocks downloads the moment payment clears, and it contains a printable license for each track. Keep the link — downloads stay available.</p>
+    </details>
+    <details>
+      <summary>Can I get a refund?</summary>
+      <p>Because files are delivered instantly, sales are final. If a file is broken or the wrong version was delivered, it is replaced or refunded — send the order number and it gets handled.</p>
+    </details>
+    <details>
+      <summary>Can I use the beat in a mixtape or a free release?</summary>
+      <p>Yes, within the tier's distribution caps — the caps count units distributed, whatever the price of the release. Non-profit live performances are covered at every tier.</p>
+    </details>
+    <details>
+      <summary>Who owns the song?</summary>
+      <p>You own the new recording you make over the beat, subject to the license. The producer retains authorship and ownership of the underlying composition and instrumental. Publishing splits can be agreed separately for bigger releases.</p>
+    </details>
+  </section>
+
+  <section style="padding:0 0 80px">
+    <div class="notice">Full license text is generated per order and delivered with your files. Nothing here overrides the license document attached to your purchase.</div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-bottom" style="border-top:0;margin-top:0;padding-top:0">
+      <span>© <span id="year"></span> SAFRON BEATS · CALGARY, AB</span>
+      <a href="/" style="color:var(--muted)">Back to the store</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const $ = (s, r = document) => r.querySelector(s);
+function esc(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function money(n, cur) { try { return new Intl.NumberFormat('en-US', { style: 'currency', currency: cur || 'USD' }).format(n); } catch { return '$' + Number(n).toFixed(2); } }
+
+fetch('/api/config').then(r => r.json()).then(cfg => {
+  $('#year').textContent = new Date().getFullYear();
+  const rows = cfg.tiers.map(t => `<tr>
+    <td><strong style="color:var(--ink)">${esc(t.name)}</strong>${t.exclusive ? '<br><span class="mono">One buyer</span>' : ''}</td>
+    <td>${t.files.map(f => esc(f.toUpperCase())).join('<br>')}</td>
+    <td>${esc(t.caps.copies)}</td>
+    <td>${esc(t.caps.streams)}</td>
+    <td>${esc(t.caps.videos)}</td>
+    <td>${esc(t.caps.shows)}</td>
+    <td>${esc(t.caps.radio)}</td>
+    <td style="white-space:nowrap">${t.exclusive ? 'From ' + money(t.defaultPrice, cfg.currency) : money(t.defaultPrice, cfg.currency)}</td>
+  </tr>`).join('');
+  $('#capsTable tbody').innerHTML = rows;
+  $('#tierBlocks').innerHTML = cfg.tiers.map(t => `<div class="license-block">
+    <div>
+      <h3>${esc(t.name)}</h3>
+      <div class="price">${t.exclusive ? 'From ' : ''}${money(t.defaultPrice, cfg.currency)}</div>
+      <div class="mono" style="margin-top:8px">${t.files.map(f => esc(f.toUpperCase())).join(' · ')}</div>
+    </div>
+    <div>
+      <ul>${t.terms.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+      <div class="hint" style="margin-top:10px">Credit required: “Prod. ${esc(cfg.producer)}”. Non-exclusive${t.exclusive ? '' : ' — the beat stays available to other artists'}.</div>
+    </div>
+  </div>`).join('');
+}).catch(() => {
+  $('#tierBlocks').innerHTML = '<p class="hint">Could not load license data.</p>';
+});
+</script>
+</body>
+</html>

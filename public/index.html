@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SAFRON BEATS — Underground Hip Hop Instrumentals</title>
+<meta name="description" content="Underground hip hop instrumentals out of Calgary, Alberta. Dusty samples, hard drums, no borrowed loops. Lease it, take the stems, wreck the record.">
+<meta name="theme-color" content="#0b0a09">
+<link rel="stylesheet" href="/css/app.css">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a href="/" class="brand" aria-label="SAFRON BEATS — home"><img src="/assets/safron-logo.png" alt="SAFRON BEATS"></a>
+    <nav class="nav" aria-label="Main">
+      <a href="/" aria-current="page">Beats</a>
+      <a href="/kits">Kits</a>
+      <a href="/plugins">Plugins</a>
+      <a href="/about">About</a>
+    </nav>
+    <div class="topbar-right">
+      <button class="cart-btn" id="cartOpen" aria-label="Open cart">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 7h18l-1.6 12.2a2 2 0 0 1-2 1.8H6.6a2 2 0 0 1-2-1.8L3 7Z"/><path d="M8 7V5.5a4 4 0 0 1 8 0V7"/></svg>
+        <span class="lbl">Cart</span>
+        <span class="cart-count" id="cartCount" data-empty="true">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <h1 class="sr-only">SAFRON BEATS — underground hip hop instrumentals for lease</h1>
+
+  <section class="hero" id="hero" aria-label="Latest drop"></section>
+
+  <!-- catalog -->
+  <section class="catalog" id="catalog">
+    <div class="wrap">
+      <div class="catalog-head">
+        <div>
+          <h2>Available for lease</h2>
+        </div>
+        <div class="catalog-count" id="catalogCount"></div>
+      </div>
+
+      <div class="filters">
+        <div class="wrap" style="padding:0 var(--pad)">
+          <div class="filters-in" id="filters">
+            <button class="filter-chip" data-genre="" aria-pressed="true">All</button>
+            <label class="filter-search">
+              <input class="input" type="search" id="search" placeholder="Search titles, tags…" aria-label="Search beats">
+            </label>
+            <select class="filter-select" id="sort" aria-label="Sort beats">
+              <option value="new">Newest</option>
+              <option value="low">Price: low</option>
+              <option value="high">Price: high</option>
+              <option value="bpm">BPM</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid" id="grid" aria-live="polite"></div>
+
+      <div class="empty" id="emptyState" hidden>
+        <h3>Nothing on the shelf yet.</h3>
+        <p>New beats land here as they're finished. Check back — or ask for something built to your voice.</p>
+        <a class="btn" href="#contact">Request a beat</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- contact -->
+  <section id="contact" style="padding:48px 0 40px">
+    <div class="wrap">
+      <hr class="rule">
+      <div style="display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:end;padding-top:28px">
+        <div>
+          <div class="eyebrow">Contact</div>
+          <h2 class="display" style="font-size:clamp(28px,3.4vw,42px);margin:10px 0 0">Need a beat that isn't on the shelf?</h2>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn" id="mailLink" href="#">Email</a>
+          <a class="btn ghost" id="igLink" href="#" hidden>Instagram</a>
+          <a class="btn ghost" id="ytLink" href="#" hidden>YouTube</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="/" class="footer-brand" aria-label="SAFRON BEATS"><img src="/assets/safron-logo.png" alt="SAFRON BEATS"></a>
+        <p style="margin-top:14px">Underground hip hop instrumentals out of Calgary, Alberta.</p>
+      </div>
+      <div>
+        <h4>Store</h4>
+        <a href="#catalog">Beats</a>
+        <a href="/licensing">Licensing &amp; terms</a>
+        <a href="/licensing#faq">FAQ</a>
+      </div>
+      <div>
+        <h4>Producer</h4>
+        <a href="#contact">Contact</a>
+        <a href="https://safronbeats.bandcamp.com/" target="_blank" rel="noopener">Bandcamp ↗</a>
+        <a href="/admin">Admin</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> SAFRON BEATS</span>
+      <span>No tags. No loop packs. No filler.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- cart drawer -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="cartDrawer" aria-label="Cart" aria-hidden="true">
+  <div class="drawer-head">
+    <h3>Your cart</h3>
+    <button class="close-x" id="cartClose" aria-label="Close cart">×</button>
+  </div>
+  <div class="drawer-body" id="cartBody"></div>
+  <div class="drawer-foot">
+    <div class="totals"><span>Total</span><strong id="cartTotal">$0.00</strong></div>
+    <a class="btn solid block" id="checkoutBtn" href="/checkout">Checkout</a>
+    <p class="hint" style="margin:10px 0 0">Secure checkout · instant download · license included</p>
+  </div>
+</aside>
+
+<!-- license modal -->
+<div class="modal" id="licenseModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-panel">
+    <div class="modal-head">
+      <div class="art" id="modalArt"></div>
+      <div>
+        <h3 id="modalTitle">—</h3>
+        <div class="modal-sub" id="modalSub">—</div>
+      </div>
+      <button class="close-x" id="modalClose" aria-label="Close" style="margin-left:auto">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="eyebrow" style="margin:14px 0 2px">Choose a license</div>
+      <div id="tierList"></div>
+      <p class="hint" style="margin-top:16px">All leases are non-exclusive and perpetual. Files are delivered immediately after payment, with a signed license for your records.</p>
+    </div>
+    <div class="modal-foot">
+      <div>
+        <div class="eyebrow">Selected</div>
+        <div id="modalSelected" style="font-size:14px;font-weight:600">—</div>
+      </div>
+      <button class="btn accent" id="modalAdd">Add to cart</button>
+    </div>
+  </div>
+</div>
+
+<!-- player -->
+<div class="player" id="player" aria-label="Audio player">
+  <div class="player-in">
+    <div class="player-cover" id="playerArt"></div>
+    <div class="player-meta">
+      <div class="player-title" id="playerTitle">—</div>
+      <div class="player-sub" id="playerSub">—</div>
+      <div class="player-progress">
+        <span class="player-time" id="playerCur">0:00</span>
+        <div class="player-bar" id="playerBar" role="slider" aria-label="Seek" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="player-bar-fill" id="playerFill"></div>
+        </div>
+        <span class="player-time" id="playerDur">0:00</span>
+      </div>
+    </div>
+    <div class="player-controls">
+      <button class="icon-btn" id="prevBtn" aria-label="Previous">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg>
+      </button>
+      <button class="icon-btn big" id="playBtn" aria-label="Play">
+        <svg viewBox="0 0 24 24" fill="currentColor" id="playIcon" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg>
+      </button>
+      <button class="icon-btn" id="nextBtn" aria-label="Next">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg>
+      </button>
+      <button class="icon-btn" id="muteBtn" aria-label="Mute">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg>
+      </button>
+    </div>
+    <div class="player-buy">
+      <button class="btn small" id="playerLicense">Licenses</button>
+    </div>
+  </div>
+</div>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<audio id="audio" preload="metadata"></audio>
+
+<script src="/js/store.js"></script>
+</body>
+</html>

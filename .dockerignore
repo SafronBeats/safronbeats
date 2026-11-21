@@ -1,0 +1,8 @@
+node_modules
+uploads
+data
+preview
+.tmp
+.git
+.env
+*.log

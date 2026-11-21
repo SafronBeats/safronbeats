@@ -1,0 +1,27 @@
+{
+  "name": "safronbeats",
+  "version": "1.0.0",
+  "description": "SAFRONBEATS — beat store with tiered non-exclusive leases, PayPal/Stripe checkout and a self-serve upload studio.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "seed:demo": "node scripts/seed-demo.js",
+    "test:payments": "node scripts/test-payments.js",
+    "test:smoke": "node scripts/smoke-test.js"
+  },
+  "keywords": [
+    "beats",
+    "beatstore",
+    "licensing"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "type": "commonjs",
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "express": "^4.22.3",
+    "multer": "^1.4.5-lts.1"
+  }
+}
